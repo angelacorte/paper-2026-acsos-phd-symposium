@@ -98,7 +98,7 @@ and self-organization to achieve global objectives,
 while self-adapting to dynamic changes in the environment.
 
 From the \ac{ac} perspective,
-the current gap comprehends
+the current requirements are
 \begin{inlinelist}
     \item the support for concurrent execution of multiple applications on the same device;
     \item the definition of a permission system to control the access to the devices and their resources;
@@ -112,6 +112,47 @@ This work aims to address those gaps by proposing a set of mechanisms and algori
 and by providing a set of reusable building blocks that can be used to implement applications on top of it.
 
 \section{Methods and Results}\label{sec:methods-and-results}
+
+The research work to cover the gaps mentioned in \Cref{sec:objectives-and-contributions} is currently ongoing,
+and it is being carried out through a bottom-up approach,
+starting from specific scenarios and use cases that aim to address individual gaps,
+and then generalizing the solutions to be applicable to a wider range of scenarios.
+
+Practical \ac{ac} systems are typically supported by \acp{dsl}
+implementing variants of the \ac{fc}~\cite{DBLP:journals/tocl/AudritoVDPB19,DBLP:journals/jss/AudritoCDSV24},
+and by libraries layered on top of them.
+%
+Such \acp{dsl} may be implemented either as standalone languages~\cite{DBLP:conf/sac/PianiniVB15}
+or as internal languages embedded in mainstream programming environments,
+including Scala~\cite{DBLP:journals/softx/CasadeiVAP22},
+C++~\cite{DBLP:journals/scp/AudritoT24},
+Kotlin~\cite{DBLP:conf/acsos/Cortecchia24},
+and Python~\cite{DBLP:journals/corr/abs-2603-29999}.
+%
+In this work,
+we use the Kotlin-based \ac{dsl} \emph{Collektive} as the reference \ac{ac} language.
+
+The first contribution towards the design of a \ac{cos} is the definition of resource flow management,
+which allows to distribute the available resources among the running applications,
+and to ensure that each application can access the resources it needs to run.
+%
+This has been achieved by leveraging a \emph{vascular morphogenesis} algorithm,
+called \emph{FieldVMC}~\cite{DBLP:journals/comintsys/CortecchiaCCP26, DBLP:conf/acsos/CortecchiaDCCV26},
+which allows to create a network of resource flows from a source to a set of sinks,
+that can adapt to changes in the environment and in the network topology.
+
+A second contribution is a runtime mechanism to change the execution path of a set of tasks.
+%
+This has been achieved by leveraging \emph{path replanning}~\cite{DBLP:conf/acsos/AguzziBCMPPV25},
+and \ac{ac} primitives for coordination and communication.
+
+For what it concerns consensus among distributed devices,
+a self-stabilizing \emph{min-max gossip} algorithm has been proposed~\cite{DBLP:conf/coordination/CortecchiaPV26},
+
+
+monitoring~\cite{DBLP:conf/dcoss/CortecchiaDCCPV26,DBLP:conf/acsos/CortecchiaDCCV26}
+gossip~\cite{DBLP:conf/coordination/CortecchiaPV26}
++ carol
 
 
 \section{Future Work and Research Plan}\label{sec:future-work-and-research-plan}
