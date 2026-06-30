@@ -51,7 +51,8 @@ while still achieving its goals.
 \ac{ac}~\cite{DBLP:journals/computer/BealPV15} address the problem of designing and implementing self-organizing systems by providing a programming model that allows developers to focus on the desired global behavior of the system,
 rather than on the individual behavior of each device.
 %
-This paradigm lets developers express the swarm-level behavior through composition of \emph{computational fields},
+This paradigm is based on the \ac{fc}~\cite{DBLP:journals/tocl/AudritoVDPB19},
+and lets developers express the swarm-level behavior through composition of \emph{computational fields}~\cite{JLAMP2019},
 a distributed data structure that maps devices to their values,
 and that can be manipulated through a set of high-level operators.
 %
@@ -59,11 +60,14 @@ Over the years, reusable building blocks~\cite{DBLP:journals/tomacs/ViroliABDP18
 supporting self-stabilizing~\cite{DBLP:journals/cacm/Dijkstra74} behaviors
 have been proposed and later used in high-level libraries such as MacroSwarm~\cite{DBLP:journals/lmcs/AguzziCV25},
 which supports pattern formation in swarm robotics.
+%
+By design,
+\ac{ac} is resilient to failures and scalable to large numbers of devices,
+as it relies on local interactions and \emph{self-organization} to achieve global objectives.
 
 However,
-typical \ac{ac} applications run a single although complex isolated algorithm on each device,
-without preemption or
-the possibility of running multiple algorithms concurrently and independently,
+typical \ac{ac} applications run a single although complex algorithm on each device,
+without preemption or possibility of running multiple algorithms concurrently and independently,
 and no users permission definition is provided.
 %
 In the aforesaid scenario, this is a limitation,
