@@ -34,9 +34,47 @@ aggregate computing, distributed systems, self-organizing systems, collective op
 \end{IEEEkeywords}
 
 \section{Overall Problem and Motivation}\label{sec:overall-problem-and-motivation}
-This document is a model and instructions for \LaTeX.
-Please observe the conference page limits.
-\cite{Cortecchia2025CAIS}
+In smart cities applications,
+scenarios such as crowd monitoring and steering,
+traffic management,
+or environmental monitoring and control,
+require coordination among a large number of heterogeneous, mobile, and resource-constrained devices.
+%
+Those systems are often deployed in dynamic and unpredictable environments,
+where devices may fail or be added/removed at any time;
+sometimes with the need of external intervention to prevent potential unsafe situations.
+%
+The design of such systems is challenging,
+as it requires to ensure that the system can autonomously adapt to changes in the environment and in the network topology,
+while still achieving its goals.
+
+\ac{ac}~\cite{DBLP:journals/computer/BealPV15} address the problem of designing and implementing self-organizing systems by providing a programming model that allows developers to focus on the desired global behavior of the system,
+rather than on the individual behavior of each device.
+%
+This paradigm lets developers express the swarm-level behavior through composition of \emph{computational fields},
+a distributed data structure that maps devices to their values,
+and that can be manipulated through a set of high-level operators.
+%
+Over the years, reusable building blocks~\cite{DBLP:journals/tomacs/ViroliABDP18}
+supporting self-stabilizing~\cite{DBLP:journals/cacm/Dijkstra74} behaviors
+have been proposed and later used in high-level libraries such as MacroSwarm~\cite{DBLP:journals/lmcs/AguzziCV25},
+which supports pattern formation in swarm robotics.
+
+However,
+typical \ac{ac} applications run a single although complex isolated algorithm on each device,
+without preemption or
+the possibility of running multiple algorithms concurrently and independently,
+and no users permission definition is provided.
+%
+In the aforesaid scenario, this is a limitation,
+as multiple applications may need to run concurrently on the same devices,
+and potentially third-party users (e.g., law enforcement) may need to stop or change the behavior of the system in case of emergency at runtime.
+%
+Moreover,
+\ac{ac} leverages on the \emph{eventual} consistency of the system to achieve self-stabilization,
+which may not be sufficient in safety-critical scenarios,
+where a temporary inconsistency may lead to unsafe situations,
+such as surveillance drones colliding with each other or entering restricted areas.
 
 \section{Objectives and Contributions}\label{sec:objectives-and-contributions}
 
