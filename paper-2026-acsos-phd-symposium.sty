@@ -1,0 +1,99 @@
+% !TEX root = paper-2026-acsos-phd-symposium.tex
+
+\usepackage{cite}
+%\usepackage[hyphens]{url}
+%\usepackage[hidelinks]{hyperref}
+%\hypersetup{breaklinks=true}
+\usepackage{amsmath,amssymb,amsfonts}
+% \usepackage{algorithmic}
+\usepackage{graphicx}
+\usepackage[hidelinks]{hyperref}
+\usepackage{url}
+\usepackage{xcolor}
+\usepackage[inline]{enumitem}
+\usepackage{mytodonotes}
+\usepackage{myacronyms}
+\usepackage{listings}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{nicefrac}
+\usepackage{siunitx}
+\usepackage{cleveref}
+
+% this is not necessary if cleveref is loaded after caption and subcaption
+% \crefname{lstlisting}{listing}{listings} % Define cref format for lstlisting
+% \Crefname{lstlisting}{Listing}{Listings} % Define Cref format for lstlisting
+% \captionsetup[lstlisting]{font=footnotesize,skip=3pt}
+
+\newenvironment{inlinelist}{\begin{enumerate*}[label=\emph{(\roman*)}]}{\end{enumerate*}}
+
+% Math operators
+\renewcommand{\vec}[1]{\ensuremath{\mathbf{#1}}} % vector
+
+%%%%%%% FIX CLEVEREF/ACRONYM https://tex.stackexchange.com/questions/735500/problem-with-amsmath-cleveref-acronym
+\makeatletter
+\AtBeginDocument
+ {
+   \def\ltx@label#1{\cref@label{#1}}%add braces
+   \def\label@in@display@noarg#1{\cref@old@label@in@display{#1}}%remove braces
+\def\label@in@mmeasure@noarg#1{%
+    \begingroup%
+      \measuring@false%
+      \cref@old@label@in@display{#1}%remove braces for multline, see https://tex.stackexchange.com/q/737204/2388
+    \endgroup}%
+ } %
+\makeatother
+%%%%%%% END FIX CLEVEREF/ACRONYM
+
+\lstdefinelanguage{kotlin}{,
+  keywordstyle=[2]\color{blue},
+  keywords=[2]{lateinit, open, get, set, constructor,suspend,yield,operator,by,it,vararg,sealed,inner,infix,
+  abstract,case,catch,class,def,%
+    do,extends,false,final,finally,%
+    for,implicit,import,match,mixin,%
+    null,object,override,package,%
+    private,protected,requires,return,sealed,%
+    super,this,throw,trait,true,try,fun,inline,reified,out,%
+    type,val,var,while,with,data,when,as,expect,annotation,actual,
+    public, private, internal, protected,when,is,interface,in,typealias,context},
+  keywordstyle=[3]\bfseries\color{black},
+  keywords=[3]{Any,Unit,String,Int,Double,Boolean},
+  otherkeywords={=>,<-,<\%,<:,>:,\#,{@}},
+  sensitive=true,
+  morecomment=[l]{//},
+  morecomment=[n]{/*}{*/},
+  morestring=[b]",
+  morestring=[b]',
+  morestring=[b]""",
+}
+
+\definecolor{ddarkgreen}{rgb}{0,0.5,0}
+\definecolor{MidnightBlue}{rgb}{0.1, 0.1, 0.44} 
+
+\lstdefinelanguage{collektive}{
+  frame=single,
+  basewidth=0.5em,
+  language={kotlin},
+  keywordstyle=\color{blue}\textbf,
+  commentstyle=\color{ddarkgreen},
+  keywordstyle=[5]\color{red}\textbf,
+  keywords=[5]{if,else,repeat,repeating,neighboring,exchange,exchanging,yielding,share,sharing},
+  keywordstyle=[6]\color{gray},
+  keywords=[6]{Me,AroundMe,Everywhere,Forever}, %,@@,@@@
+  keywordstyle=[7]\color{orange}\textbf,
+  keywords=[7]{Aggregate},
+  keywordstyle=[8]\color{violet},
+  keywords=[8]{localId,fold,hood,alignedMap,localId,min,sum,map,localValue},
+  keywordstyle=[9]\bfseries\color{black},
+  keywords=[9]{Field},
+  keywordstyle=[6]\color{MidnightBlue},
+  keywords=[6]{asSequence,mapNotNull,reduce,takeIf,to,minOf}
+}
+
+\lstset{
+  basicstyle=\lst@ifdisplaystyle\footnotesize\fi\ttfamily,
+  numbers=left,
+  xleftmargin=0.4cm,
+  language=collektive,
+  escapechar=\%,
+}
