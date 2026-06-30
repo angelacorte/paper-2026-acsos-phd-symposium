@@ -77,7 +77,35 @@ where a temporary inconsistency may lead to unsafe situations,
 such as surveillance drones colliding with each other or entering restricted areas.
 
 \section{Objectives and Contributions}\label{sec:objectives-and-contributions}
+To address the aforementioned challenges,
+the concept of \ac{cos} has born.
+%
+It conceptually maps the idea of a Distributed Operating System~\cite{DBLP:journals/csur/TanenbaumR85},
+applied to a network of devices,
+which can run multiple applications concurrently and independently,
+while providing a permission system to control the access to the devices and their resources.
+%
+Every node in the network is part of the \ac{cos},
+which is responsible for managing the resources of the devices and providing a set of services to the applications running on top of it.
+%
+The goal is to design and implement \acp{cos} based on \ac{ac},
+to offer by design scalability and resilience to failures,
+and self-organization to achieve global objectives,
+while self-adapting to dynamic changes in the environment.
 
+From the \ac{ac} perspective,
+the current gap comprehends
+\begin{inlinelist}
+    \item the support for concurrent execution of multiple applications on the same device;
+    \item the definition of a permission system to control the access to the devices and their resources;
+    \item preemption and runtime mechanism for dynamic changes in the behavior of the system;
+    \item mechanisms to ensure safety in the transient phase of the system;
+    \item heterogeneous devices that act as a collective sensor;
+    \item communication between processes in different spatial regions, e.g., shared memory space.
+\end{inlinelist}
+
+This work aims to address those gaps by proposing a set of mechanisms and algorithms that can be used to build the base of a \ac{cos} based on \ac{ac},
+and by providing a set of reusable building blocks that can be used to implement applications on top of it.
 
 \section{Methods and Results}\label{sec:methods-and-results}
 
