@@ -1,0 +1,14 @@
+% !TEX root = paper-2026-acsos-phd-symposium.tex
+\usepackage{todonotes}
+
+\newcommand{\sidenote}[3]{\todo[linecolor=#1,backgroundcolor=#1!25,bordercolor=#1]{\tiny\textbf{#2:} #3}}
+\newcommand{\note}[3]{\todo[inline,linecolor=#1,backgroundcolor=#1!25,bordercolor=#1]{\textbf{#2:} #3}}
+
+\newcommand{\danilo}[1]{\note{red}{Danilo}{#1}}
+\newcommand{\danisidenote}[1]{\sidenote{red}{Danilo}{#1}}
+\newcommand{\angela}[1]{\note{cyan}{Angela}{#1}}
+\newcommand{\acsidenote}[1]{\sidenote{cyan}{Angela}{#1}}
+\newcommand{\ale}[1]{\note{green}{Ale}{#1}}
+\newcommand{\alesidenote}[1]{\sidenote{green}{Ale}{#1}}
+
+\newcommand{\missingref}[1][{add some ref here}]{\sidenote{orange}{TODO}{#1}}
