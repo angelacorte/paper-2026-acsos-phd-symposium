@@ -34,25 +34,57 @@ aggregate computing, distributed systems, self-organizing systems, collective op
 \end{IEEEkeywords}
 
 \section{Overall Problem and Motivation}\label{sec:overall-problem-and-motivation}
-In smart cities applications,
-scenarios such as crowd monitoring and steering,
-traffic management,
-or environmental monitoring and control,
-require coordination among a large number of heterogeneous, mobile, and resource-constrained devices.
+Smart cities are characterized by the presence of a large number of heterogeneous devices,
+which are often mobile and resource-constrained.
+%
+Those devices have to coordinate among each other to achieve global objectives,
+while adapting to changes in the environment and in the network topology,
+possibly without a centralized point of coordination,
+which can introduce a single point of failure and limit the scalability of the system.
 %
 Those systems are often deployed in dynamic and unpredictable environments,
 where devices may fail or be added/removed at any time;
 sometimes with the need of external intervention to prevent potential unsafe situations.
+
+An example of such systems that comprehends swarm robotics,
+is a network of surveillance drones,
+which have to coordinate among each other to monitor a certain area,
+while maintaining a certain swarm formation, avoiding collisions and respecting no-fly zones
+and possibly allowing law enforcement to intervene in case of emergency.
+%
+Also traffic management systems,
+to optimize traffic flow and reduce congestion,
+or environmental monitoring and control systems,
+to monitor and control air quality and pollution levels,
+are examples of such systems.
+%
+The requirements for such swarm systems are manifold,
+including
+\begin{inlinelist}
+    \item the ability to run multiple applications concurrently and independently on the same devices;
+    \item the ability to define a permission system to control the access to the devices and their resources;
+    \item the ability to preempt and change the behavior of the system at runtime;
+    \item the ability to ensure safety in the transient phase of the system;
+    \item the ability to leverage heterogeneous devices that act as a collective sensor;
+    \item the ability to communicate between processes in different spatial regions.
+\end{inlinelist}
+
+For those \acp{cps},
+\ac{cas}~\cite{DBLP:conf/huc/Ferscha15} are employed,
+which are systems composed of multiple heterogeneous devices that interact with each other and with the environment to achieve a common goal,
+designed to be resilient to failures and scalable to large numbers of devices.
 %
 The design of such systems is challenging,
 as it requires to ensure that the system can autonomously adapt to changes in the environment and in the network topology,
 while still achieving its goals.
 
-\ac{ac}~\cite{DBLP:journals/computer/BealPV15} address the problem of designing and implementing self-organizing systems by providing a programming model that allows developers to focus on the desired global behavior of the system,
+A feasible approach to design and implement \acp{cas} is through macroprogramming~\cite{casadei22},
+allowing developers to focus on the desired global behavior of the system,
 rather than on the individual behavior of each device.
 %
-This paradigm is based on the \ac{fc}~\cite{DBLP:journals/tocl/AudritoVDPB19},
-and lets developers express the swarm-level behavior through composition of \emph{computational fields}~\cite{JLAMP2019},
+On top of this concept,
+is built the \ac{ac} paradigm~\cite{DBLP:journals/computer/BealPV15},
+which provides a programming model that allows developers to express the collective-level behavior of the system through composition of \emph{computational fields}~\cite{JLAMP2019},
 a distributed data structure that maps devices to their values,
 and that can be manipulated through a set of high-level operators.
 %
