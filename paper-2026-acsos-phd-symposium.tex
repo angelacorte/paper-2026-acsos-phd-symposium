@@ -121,7 +121,7 @@ The requirements for such swarm systems include
 
 \section{Methods and Results}\label{sec:methods-and-results}
 
-The research work to cover the gaps mentioned in \Cref{sec:objectives-and-contributions} is currently ongoing,
+The research work to cover the gaps mentioned in \Cref{sec:overall-problem-and-motivation} and \Cref{sec:objectives-and-contributions} is currently ongoing,
 and it is being carried out through a bottom-up approach,
 starting from specific scenarios and use cases that aim to address individual gaps,
 and then generalizing the solutions to be applicable to a wider range of scenarios.
@@ -138,29 +138,100 @@ Kotlin~\cite{DBLP:conf/acsos/Cortecchia24},
 and Python~\cite{DBLP:journals/corr/abs-2603-29999}.
 %
 In this work,
-we use the Kotlin-based \ac{dsl} \emph{Collektive} as the reference \ac{ac} language.
+we use the Kotlin-based \ac{dsl} \emph{Collektive} as the reference \ac{ac} language,
+for its portability to different platforms.
 
-The first contribution towards the design of a \ac{cos} is the definition of resource flow management,
-which allows to distribute the available resources among the running applications,
-and to ensure that each application can access the resources it needs to run.
+For what it concerns the requirements regarding the formation of spatial structures,
+a \emph{morphogenetic} approach to structure formation has been proposed~\cite{DBLP:journals/comintsys/CortecchiaCCP26,DBLP:conf/acsos/CortecchiaPCC24},
+which allows to create resilient structures in a self-organizing and self-adaptive way,
+based on information about the environment.
 %
-This has been achieved by leveraging a \emph{vascular morphogenesis} algorithm,
-called \emph{FieldVMC}~\cite{DBLP:journals/comintsys/CortecchiaCCP26, DBLP:conf/acsos/CortecchiaDCCV26},
-which allows to create a network of resource flows from a source to a set of sinks,
-that can adapt to changes in the environment and in the network topology.
+The base approach is to leverage resource flow management in a network of devices and to distribute them towards the most successful area of the network,
+but it can be generalized to specifically create resilient structures that follows mathematically-defined shapes.
 
-A second contribution is a runtime mechanism to change the execution path of a set of tasks.
+About the requirements regarding runtime changes in the behavior of the system,
+a runtime path replanning mechanism has been proposed~\cite{DBLP:conf/acsos/AguzziBCMPPV25}.
 %
-This has been achieved by leveraging \emph{path replanning}~\cite{DBLP:conf/acsos/AguzziBCMPPV25},
-and \ac{ac} primitives for coordination and communication.
+It deals with different devices in an environment that are assigned with a set of tasks to be executed.
+%
+The devices have to coordinate among each other to achieve the global objective of executing all the tasks,
+while adapting their execution plan to changes such as a device failure,
+meaning that the tasks assigned to the failed device have to be reassigned to other devices in the network.
 
-For what it concerns consensus among distributed devices,
+Considering the consensus requirements,
 a self-stabilizing \emph{min-max gossip} algorithm has been proposed~\cite{DBLP:conf/coordination/CortecchiaPV26},
+to provide an adaptive and resilient mechanism to reach consensus on a certain selector among a set of distributed devices,
+for example the minimum or maximum value of some sensed information.
+%
+It differs from classic approaches as it is resilient to failures and dynamic changes in the environment,
+without the need of parametrization to reset the gossip memory when the network topology changes.
 
+From the perspective of collective sensing and monitoring,
+a set of self-organizing algorithms have been proposed through \ac{dpf}~\cite{DBLP:conf/dcoss/CortecchiaDCCPV26,DBLP:conf/acsos/CortecchiaDCCV26},
+an approach for state estimation in distributed systems.
+%
+\ac{ac} has been used to improve the resilience of the system to failures,
+and to provide a better neighboring estimation without the need of exchanging excessive information among devices.
 
-monitoring~\cite{DBLP:conf/dcoss/CortecchiaDCCPV26,DBLP:conf/acsos/CortecchiaDCCV26}
-gossip~\cite{DBLP:conf/coordination/CortecchiaPV26}
-+ carol
+Finally,
+to avoid unsafe situation while the system is converging to a stable state,
+a safety filter mechanism is ongoing work.
+%
+By leveraging \ac{cbf}~\cite{DBLP:conf/eucc/AmesCENST19} and \ac{clf}~\cite{DBLP:journals/ieeejas/LiWYWH23} theory applied to \ac{ac} \footnote{\url{https://github.com/angelacorte/carol-experiments}}. %%todo, add reference to the paper when (if) accepted,
+%
+\ac{cbf} and \ac{clf} are used to define a set of constraints on the system,
+such as minimum or maximum distance between devices,
+which are then used to enforce safety on the system at runtime,
+while computing adaptive swarm-level objectives.
+
+% Partirei dai requisiti e parlerei dei contributi
+% formazione
+%The first contribution towards \ac{cros} is a morphogenetic approach to resource flow management in a network of devices,
+%called \emph{FieldVMC}~\cite{DBLP:journals/comintsys/CortecchiaCCP26,DBLP:conf/acsos/CortecchiaPCC24},
+%which allows to distribute the available resources in the network from a source to the most successful area of the network.
+
+%This approach can be used to build self-organizing and self-adaptive artificial structures,
+%resilient to failures and dynamic changes in the environment.
+
+% todo runtime changes
+%The second contribution is a runtime path replanning mechanism.
+
+%A set of devices in an environment are assigned with a set of tasks to be executed,
+%they have to coordinate among each other to achieve the global objective of executing all the tasks,
+%adapting their execution plan to changes such as a device failure,
+%meaning that the tasks assigned to the failed device have to be reassigned to other devices in the network.
+
+%This has been achieved by leveraging \emph{path replanning}~\cite{DBLP:conf/acsos/AguzziBCMPPV25},
+%and \ac{ac} primitives for coordination and communication.
+
+% todo consensus
+%For what it concerns consensus among distributed devices,
+%a self-stabilizing \emph{min-max gossip} algorithm has been proposed~\cite{DBLP:conf/coordination/CortecchiaPV26},
+%to provide an adaptive and resilient mechanism to reach consensus on a certain selector among a set of distributed devices.
+
+%This algorithm can be used to build self-organizing and self-adaptive systems,
+%where devices can reach consensus on a certain value or decision,
+%in respect of classic approaches,
+%it is resilient to failures and dynamic changes in the environment,
+%and it does not need parametrization to reset the gossip memory when the network topology changes.
+
+% todo collective sensing
+%From the perspective of collective sensing and monitoring,
+%a set of self-organizing algorithms have been proposed through \ac{dpf}~\cite{DBLP:conf/dcoss/CortecchiaDCCPV26,DBLP:conf/acsos/CortecchiaDCCV26},
+%an approach for state estimation in distributed systems.
+
+%\ac{ac} has been used to improve the resilience of the system to failures,
+%and to provide a better neighboring estimation without the need of exchanging excessive information among devices.
+
+%A safety filter mechanism is ongoing work,
+%by leveraging \ac{cbf}~\cite{DBLP:conf/eucc/AmesCENST19} and \ac{clf}~\cite{DBLP:journals/ieeejas/LiWYWH23} theory applied to \ac{ac} \footnote{\url{https://github.com/angelacorte/carol-experiments}} %%todo, add reference to the paper when (if) accepted,
+%in order to provide a runtime mechanism to ensure safety in the transient phase of the system and guarantee that the system will converge to a safe state.
+
+%\ac{cbf} and \ac{clf} are used to define a set of constraints on the system,
+%which are then used to enforce safety on the system at runtime,
+%while computing adaptive swarm-level objectives.
+
+%+ carol \footnote{\url{https://github.com/angelacorte/carol-experiments}} %%todo, add reference to the paper when (if) accepted
 
 
 \section{Future Work and Research Plan}\label{sec:future-work-and-research-plan}
