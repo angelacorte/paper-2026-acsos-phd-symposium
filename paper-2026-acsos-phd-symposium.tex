@@ -34,59 +34,68 @@ aggregate computing, distributed systems, self-organizing systems, collective op
 \end{IEEEkeywords}
 
 \section{Overall Problem and Motivation}\label{sec:overall-problem-and-motivation}
-Smart cities are characterized by the presence of a large number of heterogeneous devices,
-which are often mobile and resource-constrained.
+Swarm robotics are characterized by the presence of a large number of heterogeneous devices,
+which are mobile and resource-constrained.
 %
-Those devices have to coordinate among each other to achieve global objectives,
+An example is a network of surveillance drones,
+which have to coordinate among each other to monitor a certain area,
+while maintaining a certain swarm formation, avoiding collisions and respecting no-fly zones
+and possibly allowing law enforcement to intervene in case of emergency.
+%
+Also environmental monitoring systems and search-and-rescue operations can benefit from swarm robotics,
+such as wildfire monitoring and disaster response.
+
+Those devices must coordinate among each other to achieve global objectives,
 while adapting to changes in the environment and in the network topology,
 possibly without a centralized point of coordination,
 which can introduce a single point of failure and limit the scalability of the system.
 %
 Those systems are often deployed in dynamic and unpredictable environments,
-where devices may fail or be added/removed at any time;
-sometimes with the need of external intervention to prevent potential unsafe situations.
+where devices may fail or be added/removed at any time.
 
-An example of such systems that comprehends swarm robotics,
-is a network of surveillance drones,
-which have to coordinate among each other to monitor a certain area,
-while maintaining a certain swarm formation, avoiding collisions and respecting no-fly zones
-and possibly allowing law enforcement to intervene in case of emergency.
-%
-Also traffic management systems,
-to optimize traffic flow and reduce congestion,
-or environmental monitoring and control systems,
-to monitor and control air quality and pollution levels,
-are examples of such systems.
-%
-The requirements for such swarm systems are manifold,
-including
-\begin{inlinelist}
-    \item the support for concurrent execution of multiple applications on the same device;
-    \item the definition of a permission system to control the access to the devices and their resources;
-    \item preemption and runtime mechanism for dynamic changes in the behavior of the system;
-    \item mechanisms to ensure safety in the transient phase of the system;
-    \item heterogeneous devices that act as a collective sensor;
-    \item communication between processes in different spatial regions.
-\end{inlinelist}
-
-For those \acp{cps},
-\ac{cas}~\cite{DBLP:conf/huc/Ferscha15} are employed,
-which are systems composed of multiple heterogeneous devices that interact with each other and with the environment to achieve a common goal,
-designed to be resilient to failures and scalable to large numbers of devices.
-%
 The design of such systems is challenging,
 as it requires to ensure that the system can autonomously adapt to changes in the environment and in the network topology,
 while still achieving its goals.
 
-A feasible approach to design and implement \acp{cas} is through macroprogramming~\cite{casadei22},
-allowing developers to focus on the desired global behavior of the system,
+A possible approach to design swarm robotics systems is through macroprogramming~\cite{casadei22},
+which allows developers to focus on the desired global behavior of the system,
 rather than on the individual behavior of each device.
 %
 On top of this concept,
 is built the \ac{ac} paradigm~\cite{DBLP:journals/computer/BealPV15},
-which provides a programming model that allows developers to express the collective-level behavior of the system through composition of \emph{computational fields}~\cite{JLAMP2019},
+which provides a programming model that allows to express the collective-level behavior of the system through composition of \emph{computational fields}~\cite{JLAMP2019},
 a distributed data structure that maps devices to their values,
 and that can be manipulated through a set of high-level operators.
+
+By design,
+\ac{ac} is resilient to failures and scalable to large numbers of devices,
+as it relies on local interactions and \emph{self-organization} to achieve global objectives.
+%
+Over the years, reusable building blocks~\cite{DBLP:journals/tomacs/ViroliABDP18}
+supporting self-stabilizing~\cite{DBLP:journals/cacm/Dijkstra74} \ac{ac} behaviors
+have been proposed and later used in high-level libraries such as MacroSwarm~\cite{DBLP:journals/lmcs/AguzziCV25},
+which supports pattern formation in swarm robotics.
+%%
+%Moreover,
+%a general formal framework for the specification of collective computational processes has been proposed~\cite{EAAI2020-processes},
+%which are temporary distributed computations carried out by dynamic groups of devices,
+%as well as a set of algorithms for efficient propagation and termination of such concurrent execution processes~\cite{DBLP:journals/fgcs/AudritoCT24}.
+
+However,
+typical \ac{ac} applications run a single although complex algorithm on each device,
+without preemption or possibility of changing dynamically the behavior of the system at runtime,
+and no users permission definition is provided.
+%
+In the context of swarm robotics,
+this is a limitation,
+as multiple applications may need to run concurrently on the same devices,
+and potentially third-party users (e.g., law enforcement) may need to stop or change the behavior of the system at runtime in case of emergency.
+%
+Moreover, %% todo ale
+\ac{ac} leverages on the \emph{eventual} consistency of the system to achieve self-stabilization,
+which may not be sufficient in safety-critical scenarios,
+where a temporary inconsistency may lead to unsafe situations,
+such as surveillance drones colliding with each other or entering restricted areas.
 
 \section{Objectives and Contributions}\label{sec:objectives-and-contributions}
 
