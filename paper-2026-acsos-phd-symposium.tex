@@ -24,9 +24,28 @@ angela.cortecchia@unibo.it}
 \maketitle
 
 \begin{abstract}
-This document is a model and instructions for \LaTeX.
-This and the IEEEtran.cls file define the components of your paper [title, text, heads, etc.]. *CRITICAL: Do Not Use Symbols, Special Characters, Footnotes, 
-or Math in Paper Title or Abstract.
+Swarm robotic systems are increasingly relevant for missions in which many autonomous devices must operate in dynamic and potentially safety-critical environments.
+%
+Programming such systems remains challenging:
+developers need to express objectives at the collective level,
+while their execution is distributed across devices that may move,
+fail, join or leave the system,
+without a centralized point of coordination.
+%
+\acl{ac} addresses this issue by providing macroprogramming abstractions for specifying resilient and self-organizing collective behaviors.
+%
+However,
+current \acl{ac} applications typically execute a single collective program and offer limited support for runtime adaptation,
+preemption, concurrent applications, and safety guarantees during transient phases.
+
+This research investigates the foundations of a \acl{cros} built on \acl{ac}:
+a middleware layer that lifts ROS-inspired capabilities from individual robots to the collective level.
+%
+The paper outlines the main requirements for such a system and reports ongoing contributions on morphogenetic formation control,
+runtime path replanning, self-stabilizing consensus, collective sensing, and safety guarantees.
+%
+These results provide initial building blocks towards a collective operating layer for swarm robotics,
+with future work focusing on safe runtime adaptation and support for multiple concurrent collective processes.
 \end{abstract}
 
 \begin{IEEEkeywords}
