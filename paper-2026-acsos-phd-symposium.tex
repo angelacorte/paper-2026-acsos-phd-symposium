@@ -257,10 +257,31 @@ and are then used to enforce safety on the system at runtime while computing ada
 
 \section{Future Work and Research Plan}\label{sec:future-work-and-research-plan}
 
+As next steps of the research,
+the focus will be on the safety filter mechanism,
+to improve it by defining constraints on swarm formation and runtime target changing policy.
+%
+A follow-up of this work can be the integration of the \ac{cbf} within the morphogenesis algorithm,
+to define the formation of more complex structures.
+
+Moreover,
+a particular focus will be on the support of preemption and the execution of multiple applications on the same device,
+since this is a fundamental requirement for a \ac{cros} to be used in real-world scenarios.
+%
+Currently,
+a general formal framework for the specification of collective computational processes has been proposed~\cite{EAAI2020-processes},
+which are temporary distributed computations carried out by dynamic groups of devices,
+as well as a set of algorithms for efficient propagation and termination of such concurrent execution processes~\cite{DBLP:journals/fgcs/AudritoCT24}.
+%
+However,
+this approach has still some limitations on how a computational process should spread or reduce in space,
+so this will be investigated in the future to provide a more general approach to the execution of multiple applications on the same device.
+
+The research plan will include the definition of the prototype of a \ac{cros} based on \ac{ac},
+by focusing on providing a set of reusable building blocks and algorithms that support easy global objectives definition and self-organization.
 
 \section*{Acknowledgment}
 This work has been supervised by Prof. Danilo Pianini and co-supervised by Prof. Mirko Viroli.
-
 
 \bibliographystyle{IEEEtran}
 \bibliography{bibliography}
