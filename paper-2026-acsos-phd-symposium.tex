@@ -76,16 +76,27 @@ The design of such systems is challenging,
 as it requires ensuring that the system can autonomously adapt to changes in the environment and in the network topology,
 while still achieving its goals.
 
-A possible approach to design swarm robotics systems is through macroprogramming~\cite{casadei22},
-which allows developers to focus on the desired global behavior of the system,
-rather than on the individual behavior of each device.
+Swarm robotics studies decentralized collective behavior~\cite{brambilla2013swarm},
+while ROS~2~\cite{ros} provides middleware abstractions mainly centered on individual robots.
 %
-On top of this concept,
-is built the \ac{ac} paradigm~\cite{DBLP:journals/computer/BealPV15},
-which provides a programming model that allows to express the collective-level behavior of the system through composition of \emph{computational fields}~\cite{JLAMP2019},
+Swarm programming languages such as Buzz~\cite{DBLP:journals/software/PinciroliB16} support the expression of collective behavior,
+but provide limited runtime support for its management and adaptation.
+%
+This work investigates how aggregate computing can provide such support,
+enabling collective robotic applications to be executed,
+adapted,
+preempted,
+monitored,
+and constrained through decentralized interactions.
+
+A possible approach is through macroprogramming~\cite{casadei22},
+which allows developers to focus on the desired global behavior rather than on the individual behavior of each device.
+%
+The \ac{ac} paradigm~\cite{DBLP:journals/computer/BealPV15} builds on this idea,
+providing a programming model for expressing collective-level behavior through the composition of \emph{computational fields}~\cite{JLAMP2019},
 a distributed data structure that maps devices to their values,
 and that can be manipulated through a set of high-level operators.
-
+%
 By design,
 \ac{ac} is resilient to failures and scalable to large numbers of devices,
 as it relies on local interactions and \emph{self-organization} to achieve global objectives.
@@ -121,47 +132,55 @@ such as surveillance drones colliding with each other or entering restricted are
 % todo Obiettivo -> presentare un sistema operativo collettivo per gli sciami basato su macro-programmazione
 % todo Perche? -> paradigma con astrazioni globali, dec, ..
 
-This work aims to address \ac{ac} gaps in the context of swarm robotics,
-by proposing a set of mechanisms and algorithms that can be used to build the base of a ROS-like~\cite{ros} \ac{cros} based on \ac{ac},
-and by providing a set of reusable self-organizing building blocks that support easy global objectives definition and self-organization.
+This research investigates how \ac{ac} can support the development of a ROS-like~\cite{ros} \ac{cros},
+providing reusable mechanisms and self-organizing building blocks for defining and executing collective robotic behavior.
 %
-The challenges in designing and implementing such systems are manifold,
-as they require to ensure that the system can autonomously adapt to changes in the environment and in the network topology,
-while still achieving its goals.
+The envisioned system should adapt autonomously to environmental and topological changes while preserving its collective objectives.
 
-The requirements for such swarm systems include
-\begin{inlinelist} %%add motivation
-    \item the support for concurrent execution of multiple applications on the same device, parallelizing the execution of different tasks;
-    \item preemption and runtime mechanism for dynamic changes in the behavior of the system, to allow third-party users to change the behavior of the system at runtime in case of emergency;
-    \item mechanisms to ensure safety in the stabilization phase of the system, to avoid unsafe situations;
-    \item heterogeneous devices that act as a collective sensor, to gather distributed information from the environment;
-    \item collective-aware team action and formations, to coordinate the movement of the devices in a swarm and to maintain a certain formation;% todo aggiugi formazione spaziali per il movimento coordinato
-    \item consensus and communication mechanisms between process in different spatial regions. %todo meccanismi di consenso e communicazione tra processi in regioni spaziali differenti, ad esempio uno spazio di memoria condiviso.
+Its main requirements include
+\begin{inlinelist}
+    \item concurrent execution of multiple collective applications;
+    \item runtime adaptation and preemption,
+    allowing authorized operators to change the system behavior when required;
+    \item safety enforcement during transient and stabilization phases;
+    \item collective sensing through heterogeneous devices;
+    \item collective motion and formation control;
+    \item consensus and communication between processes operating in different spatial regions.
 \end{inlinelist}
+
+The contributions developed so far address these requirements through mechanisms for collective formation,
+task replanning,
+distributed consensus,
+collective sensing,
+and runtime safety,
+which constitute initial building blocks toward the envisioned \ac{cros}.
+
+
 
 \section{Methods and Results}\label{sec:methods-and-results}
 
-The research work to cover those gaps is currently ongoing,
-and it is being carried out through a bottom-up approach,
-starting from specific scenarios and use cases that aim to address individual gaps,
-and then generalizing the solutions to be applicable to a wider range of scenarios.
+The research follows an incremental methodology,
+investigating \ac{cros} capabilities through representative collective-robotics problems.
+%
+Current work addresses collective formation,
+task replanning,
+distributed consensus,
+collective sensing,
+and runtime safety.
+%
+For each problem,
+an \ac{ac}-based decentralized solution is designed,
+evaluated under failures,
+mobility,
+and topology changes,
+and generalized into reusable mechanisms.
 
 % per prima cosa dovevamo scegliere un linguaggio,
 % negli anni ne hanno fatti tot, abbiamo scelto ck perche portabile, multiplatform, offre una libreria ergonomica
 
-As a first step,
-the choice of the programming language to use for the implementation of the proposed solutions has been made.
-%
-During the years,
-different \acp{dsl} have been proposed to support \ac{ac} programming,
-such as Protelis~\cite{DBLP:journals/tocl/AudritoVDPB19},
-Scala-based ScaFi~\cite{DBLP:journals/softx/CasadeiVAP22},
-Python-based Phyelds~\cite{DBLP:journals/corr/abs-2603-29999},
-and the Kotlin Multi-Platform based Collektive~\cite{DBLP:conf/acsos/Cortecchia24}.
-%
-In this work,
-we use \emph{Collektive} as the reference \ac{ac} language,
-for its portability across platforms and its ergonomic library support for implementing \ac{ac} programs.
+Among existing \ac{ac} languages~\cite{DBLP:journals/tocl/AudritoVDPB19,DBLP:journals/softx/CasadeiVAP22,DBLP:journals/corr/abs-2603-29999},
+we selected Collektive~\cite{DBLP:conf/acsos/Cortecchia24} as the reference implementation language,
+due to its portability across platforms and its ergonomic library support for \ac{ac} programming.
 
 To support collective formation and spatial organization,
 we proposed a \emph{morphogenetic} approach to structure formation~\cite{DBLP:journals/comintsys/CortecchiaCCP26,DBLP:conf/acsos/CortecchiaPCC24}.
@@ -200,7 +219,7 @@ without requiring excessive information exchange among devices.
 
 Safety during transient phases is the focus of ongoing work on runtime filtering.\footnote{\url{https://github.com/angelacorte/carol-experiments}}
 %
-This direction leverages \ac{cbf}~\cite{DBLP:conf/eucc/AmesCENST19} and \ac{clf}~\cite{DBLP:journals/ieeejas/LiWYWH23} theory applied to \ac{ac}.
+This direction leverages \ac{cbf}~\cite{DBLP:conf/eucc/AmesCENST19} and \ac{clf}~\cite{DBLP:journals/ieeejas/LiWYWH23} theory applied to \ac{ac}~\cite{DBLP:conf/acsos/CortecchiaPD26}.
 %
 \ac{cbf} and \ac{clf} are used to define system-level constraints,
 such as inter-robot distances and unsafe areas,
@@ -208,6 +227,9 @@ which are enforced while adaptive swarm-level objectives are computed.
 %
 This line of work directly targets the main safety limitation of self-stabilizing systems:
 eventual convergence is not enough when transient states may already be unsafe.
+
+Within the envisioned \ac{cros},
+these mechanisms are intended to become reusable services for collective applications.
 
 \section{Future Work and Research Plan}\label{sec:future-work-and-research-plan}
 
@@ -228,7 +250,7 @@ which are temporary distributed computations carried out by dynamic groups of de
 as well as a set of algorithms for efficient propagation and termination of such concurrent execution processes~\cite{DBLP:journals/fgcs/AudritoCT24}.
 %
 However,
-this approach has still some limitations on how a computational process should spread or reduce in space,
+this approach still has some limitations on how a computational process should expand or contract across space,
 so this will be investigated in the future to provide a more general approach to the execution of multiple applications on the same device.
 
 Current contributions are not yet integrated into a unified framework;
