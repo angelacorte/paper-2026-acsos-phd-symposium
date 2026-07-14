@@ -64,7 +64,7 @@ and possibly allowing law enforcement to intervene in case of emergency.
 Also environmental monitoring systems and search-and-rescue operations can benefit from swarm robotics,
 such as wildfire monitoring and disaster response.
 
-Those devices must coordinate among each other to achieve global objectives,
+Such devices must coordinate among each other to achieve global objectives,
 while adapting to changes in the environment and in the network topology,
 possibly without a centralized point of coordination,
 which can introduce a single point of failure and limit the scalability of the system.
@@ -73,7 +73,7 @@ Those systems are often deployed in dynamic and unpredictable environments,
 where devices may fail or be added/removed at any time.
 
 The design of such systems is challenging,
-as it requires to ensure that the system can autonomously adapt to changes in the environment and in the network topology,
+as it requires ensuring that the system can autonomously adapt to changes in the environment and in the network topology,
 while still achieving its goals.
 
 A possible approach to design swarm robotics systems is through macroprogramming~\cite{casadei22},
@@ -102,16 +102,17 @@ which supports pattern formation in swarm robotics.
 
 However,
 typical \ac{ac} applications run a single although complex algorithm on each device,
-without preemption or possibility of changing dynamically the behavior of the system at runtime,
-and no users permission definition is provided.
+without preemption,
+without explicit lifecycle management for multiple collective applications,
+and with limited support for dynamically changing the behavior of the system at runtime.
 %
 In the context of swarm robotics,
 this is a limitation,
 as multiple applications may need to run concurrently on the same devices,
-and potentially third-party users (e.g., law enforcement) may need to stop or change the behavior of the system at runtime in case of emergency.
+and authorized operators (e.g., law enforcement) may need to stop or change the behavior of the system at runtime in case of emergency.
 %
-Moreover, %% todo ale
-\ac{ac} leverages on the \emph{eventual} consistency of the system to achieve self-stabilization,
+Moreover,
+\ac{ac} relies on the \emph{eventual} consistency of the system to achieve self-stabilization,
 which may not be sufficient in safety-critical scenarios,
 where a temporary inconsistency may lead to unsafe situations,
 such as surveillance drones colliding with each other or entering restricted areas.
@@ -168,7 +169,8 @@ we proposed a \emph{morphogenetic} approach to structure formation~\cite{DBLP:jo
 The approach leverages resource-flow management in a network of devices,
 distributing resources towards the most successful area of the network in a self-organizing and self-adaptive way.
 %
-It is currently being generalized to generate resilient structures that follow mathematically defined shapes.
+It is currently being generalized to generate resilient structures that follow mathematically defined shapes,
+so that formations can be specified at the collective level and maintained under local failures.
 
 Runtime adaptability has been investigated through a path-replanning mechanism~\cite{DBLP:conf/acsos/AguzziBCMPPV25}.
 %
@@ -185,8 +187,9 @@ we developed a self-stabilizing \emph{min-max gossip} algorithm~\cite{DBLP:conf/
 The algorithm provides an adaptive and resilient mechanism for reaching consensus on a selector,
 such as the minimum or maximum value of sensed information distributed across the swarm.
 %
-Unlike classical approaches,
-it tolerates failures and topology changes without requiring explicit parametrization to reset the gossip memory.
+It tolerates failures and topology changes without requiring explicit parametrization to reset the gossip memory.
+%
+This makes it a candidate primitive for communication and shared decisions between collective processes that occupy different spatial regions.
 
 Collective sensing and monitoring have been addressed through \ac{dpf}~\cite{DBLP:conf/acsos/CortecchiaDCCV26},
 an approach for state estimation in distributed systems.
@@ -197,62 +200,14 @@ without requiring excessive information exchange among devices.
 
 Safety during transient phases is the focus of ongoing work on runtime filtering.
 %
-This direction leverages \ac{cbf}~\cite{DBLP:conf/eucc/AmesCENST19} and \ac{clf}~\cite{DBLP:journals/ieeejas/LiWYWH23} theory applied to \ac{ac}\footnote{\url{https://github.com/angelacorte/carol-experiments}}. %%todo, add reference to the paper when (if) accepted,
+This direction leverages \ac{cbf}~\cite{DBLP:conf/eucc/AmesCENST19} and \ac{clf}~\cite{DBLP:journals/ieeejas/LiWYWH23} theory applied to \ac{ac}\footnote{\url{https://github.com/angelacorte/carol-experiments}}.
 %
 \ac{cbf} and \ac{clf} are used to define system-level constraints,
-such as minimum or maximum distances between devices and unsafe areas to be avoided.
+such as inter-robot distances and unsafe areas,
+which are enforced while adaptive swarm-level objectives are computed.
 %
-These constraints are then enforced at runtime while adaptive swarm-level objectives are computed.
-
-% Partirei dai requisiti e parlerei dei contributi
-% formazione
-%The first contribution towards \ac{cros} is a morphogenetic approach to resource flow management in a network of devices,
-%called \emph{FieldVMC}~\cite{DBLP:journals/comintsys/CortecchiaCCP26,DBLP:conf/acsos/CortecchiaPCC24},
-%which allows to distribute the available resources in the network from a source to the most successful area of the network.
-
-%This approach can be used to build self-organizing and self-adaptive artificial structures,
-%resilient to failures and dynamic changes in the environment.
-
-% todo runtime changes
-%The second contribution is a runtime path replanning mechanism.
-
-%A set of devices in an environment are assigned with a set of tasks to be executed,
-%they have to coordinate among each other to achieve the global objective of executing all the tasks,
-%adapting their execution plan to changes such as a device failure,
-%meaning that the tasks assigned to the failed device have to be reassigned to other devices in the network.
-
-%This has been achieved by leveraging \emph{path replanning}~\cite{DBLP:conf/acsos/AguzziBCMPPV25},
-%and \ac{ac} primitives for coordination and communication.
-
-% todo consensus
-%For what it concerns consensus among distributed devices,
-%a self-stabilizing \emph{min-max gossip} algorithm has been proposed~\cite{DBLP:conf/coordination/CortecchiaPV26},
-%to provide an adaptive and resilient mechanism to reach consensus on a certain selector among a set of distributed devices.
-
-%This algorithm can be used to build self-organizing and self-adaptive systems,
-%where devices can reach consensus on a certain value or decision,
-%in respect of classic approaches,
-%it is resilient to failures and dynamic changes in the environment,
-%and it does not need parametrization to reset the gossip memory when the network topology changes.
-
-% todo collective sensing
-%From the perspective of collective sensing and monitoring,
-%a set of self-organizing algorithms have been proposed through \ac{dpf}~\cite{DBLP:conf/dcoss/CortecchiaDCCPV26,DBLP:conf/acsos/CortecchiaDCCV26},
-%an approach for state estimation in distributed systems.
-
-%\ac{ac} has been used to improve the resilience of the system to failures,
-%and to provide a better neighboring estimation without the need of exchanging excessive information among devices.
-
-%A safety filter mechanism is ongoing work,
-%by leveraging \ac{cbf}~\cite{DBLP:conf/eucc/AmesCENST19} and \ac{clf}~\cite{DBLP:journals/ieeejas/LiWYWH23} theory applied to \ac{ac} \footnote{\url{https://github.com/angelacorte/carol-experiments}} %%todo, add reference to the paper when (if) accepted,
-%in order to provide a runtime mechanism to ensure safety in the transient phase of the system and guarantee that the system will converge to a safe state.
-
-%\ac{cbf} and \ac{clf} are used to define a set of constraints on the system,
-%which are then used to enforce safety on the system at runtime,
-%while computing adaptive swarm-level objectives.
-
-%+ carol \footnote{\url{https://github.com/angelacorte/carol-experiments}} %%todo, add reference to the paper when (if) accepted
-
+This line of work directly targets the main safety limitation of self-stabilizing systems:
+eventual convergence is not enough when transient states may already be unsafe.
 
 \section{Future Work and Research Plan}\label{sec:future-work-and-research-plan}
 
