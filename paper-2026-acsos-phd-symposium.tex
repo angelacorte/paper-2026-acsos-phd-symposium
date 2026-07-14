@@ -53,18 +53,18 @@ aggregate computing, distributed systems, self-organizing systems, swarm robotic
 \end{IEEEkeywords}
 
 \section{Overall Problem and Motivation}\label{sec:overall-problem-and-motivation}
-Swarm robotics are characterized by the presence of a large number of heterogeneous devices,
+Swarm robotic systems are characterized by the presence of a large number of heterogeneous devices,
 which are mobile and resource-constrained.
 %
 An example is a network of surveillance drones,
-which have to coordinate among each other to monitor a certain area,
+which have to coordinate with each other to monitor a certain area,
 while maintaining a certain swarm formation, avoiding collisions and respecting no-fly zones
 and possibly allowing law enforcement to intervene in case of emergency.
 %
-Also environmental monitoring systems and search-and-rescue operations can benefit from swarm robotics,
+Environmental monitoring systems and search-and-rescue operations can also benefit from swarm robotics,
 such as wildfire monitoring and disaster response.
 
-Such devices must coordinate among each other to achieve global objectives,
+Such devices must coordinate with each other to achieve global objectives,
 while adapting to changes in the environment and in the network topology,
 possibly without a centralized point of coordination,
 which can introduce a single point of failure and limit the scalability of the system.
@@ -101,7 +101,7 @@ which supports pattern formation in swarm robotics.
 %as well as a set of algorithms for efficient propagation and termination of such concurrent execution processes~\cite{DBLP:journals/fgcs/AudritoCT24}.
 
 However,
-typical \ac{ac} applications run a single although complex algorithm on each device,
+typical \ac{ac} applications run one complex algorithm on each device,
 without preemption,
 without explicit lifecycle management for multiple collective applications,
 and with limited support for dynamically changing the behavior of the system at runtime.
@@ -198,9 +198,9 @@ By exploiting \ac{ac},
 the proposed algorithms improve resilience to failures and support more accurate neighborhood estimation,
 without requiring excessive information exchange among devices.
 
-Safety during transient phases is the focus of ongoing work on runtime filtering.
+Safety during transient phases is the focus of ongoing work on runtime filtering.\footnote{\url{https://github.com/angelacorte/carol-experiments}}
 %
-This direction leverages \ac{cbf}~\cite{DBLP:conf/eucc/AmesCENST19} and \ac{clf}~\cite{DBLP:journals/ieeejas/LiWYWH23} theory applied to \ac{ac}\footnote{\url{https://github.com/angelacorte/carol-experiments}}.
+This direction leverages \ac{cbf}~\cite{DBLP:conf/eucc/AmesCENST19} and \ac{clf}~\cite{DBLP:journals/ieeejas/LiWYWH23} theory applied to \ac{ac}.
 %
 \ac{cbf} and \ac{clf} are used to define system-level constraints,
 such as inter-robot distances and unsafe areas,
