@@ -3,7 +3,6 @@
 % The preceding line is only needed to identify funding in the first footnote. If that is unneeded, please comment it out.
 \usepackage{paper-2026-acsos-phd-symposium}
 \usepackage{amsmath,amssymb,amsfonts}
-\usepackage{algorithmic}
 \usepackage{graphicx}
 \usepackage{textcomp}
 \usepackage{xcolor}
@@ -57,8 +56,8 @@ Swarm robotic systems are characterized by the presence of a large number of het
 which are mobile and resource-constrained.
 %
 An example is a network of surveillance drones,
-which have to coordinate with each other to monitor a certain area,
-while maintaining a certain swarm formation, avoiding collisions and respecting no-fly zones
+which have to coordinate with each other to monitor a given area,
+while maintaining a desired swarm formation, avoiding collisions and respecting no-fly zones
 and possibly allowing law enforcement to intervene in case of emergency.
 %
 Environmental monitoring systems and search-and-rescue operations can also benefit from swarm robotics,
@@ -69,7 +68,7 @@ while adapting to changes in the environment and in the network topology,
 possibly without a centralized point of coordination,
 which can introduce a single point of failure and limit the scalability of the system.
 %
-Those systems are often deployed in dynamic and unpredictable environments,
+These systems are often deployed in dynamic and unpredictable environments,
 where devices may fail or be added/removed at any time.
 
 The design of such systems is challenging,
@@ -148,25 +147,17 @@ Its main requirements include
     \item consensus and communication between processes operating in different spatial regions.
 \end{inlinelist}
 
-The contributions developed so far address these requirements through mechanisms for collective formation,
-task replanning,
-distributed consensus,
-collective sensing,
-and runtime safety,
+The contributions developed so far address these requirements through mechanisms for collective formation \emph{(v)},
+task replanning \emph{(ii)},
+distributed consensus \emph{(vi)},
+collective sensing \emph{(iv)},
+and runtime safety \emph{(iii)},
 which constitute initial building blocks toward the envisioned \ac{cros}.
-
-
 
 \section{Methods and Results}\label{sec:methods-and-results}
 
 The research follows an incremental methodology,
 investigating \ac{cros} capabilities through representative collective-robotics problems.
-%
-Current work addresses collective formation,
-task replanning,
-distributed consensus,
-collective sensing,
-and runtime safety.
 %
 For each problem,
 an \ac{ac}-based decentralized solution is designed,
@@ -235,7 +226,7 @@ these mechanisms are intended to become reusable services for collective applica
 
 As next steps of the research,
 the focus will be on the safety filter mechanism,
-to improve it by defining constraints on swarm formation and runtime target changing policy.
+to improve it by defining constraints on swarm formation and runtime target-switching policies.
 %
 A follow-up of this work can be the integration of the \ac{cbf} within the morphogenesis algorithm,
 to define the formation of more complex structures.
